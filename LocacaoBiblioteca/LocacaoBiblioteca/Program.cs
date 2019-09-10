@@ -19,13 +19,21 @@ namespace LocacaoBiblioteca
             //disponível em estoque
             if (numeroDoLivro=="159")
             {
-                Console.WriteLine("Livro disponível!!!");
+                Console.WriteLine("Livro indisponível!!!");
+                Console.ReadKey();
+                return;
             }
             else
             {
-                Console.WriteLine("Livro não disponível!!!");
+                Console.WriteLine("Deseja locar o livro? (1) Sim  (2) Não");
+                var resposta = Console.ReadLine();
+                if(resposta=="1")
+                {
+                    Console.WriteLine("Livro locado.");
+                    Console.ReadKey();
+                    return;
+                }
             }
-            Console.ReadKey();
         }
     }
 }
