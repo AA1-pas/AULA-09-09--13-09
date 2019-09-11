@@ -10,7 +10,7 @@ namespace Aula1_1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Teste!");
+            Console.WriteLine("Teste 09-09-2019!");
             Console.ReadKey();
         }
     }
