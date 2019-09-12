@@ -12,25 +12,32 @@ namespace ExercicioForWhile
         {
             Console.WriteLine("Informe a palavra de busca: ");
             var wordCount = FindByWhile(Console.ReadLine());
+            var wordCount2 = FindByfor(Console.ReadLine());
             Console.WriteLine($"Encontrados {wordCount} palavras.");
+            Console.WriteLine($"Encontrados {wordCount2} palavras.");
             Console.ReadKey();
         }
         /// <summary>
         /// Método para buscar a palavra pela função while
         /// </summary>
-        /// <param name="wordFind">Aceita 3 caracteres</param>
+        /// <param name="wordFind">Palavra para fazer as buscas.</param>
         /// <returns></returns>
         private static int FindByWhile(string wordFind)
         {
             var contentToFind = TextContent();
-            var lenghtText = contentToFind.Length - 2;
+            var wordCountLenght = wordFind.Length;
+            var lenghtText = contentToFind.Length - wordCountLenght + 1;
             var contWordFind = 0;
             var i = 0; // para trocar o nome da variável em todos os lugares de uma vez ctrl+r+r
             while (i < lenghtText)
             {
-                var compareWord = contentToFind[i].ToString() +
-                                  contentToFind[i + 1].ToString() +
-                                  contentToFind[i + 2].ToString();
+                var compareWord = string.Empty;
+                var b = 0;
+                while(b< wordCountLenght)
+                {
+                    compareWord += contentToFind[i + b].ToString();
+                    b++;
+                }
                 if (wordFind == compareWord)
                     contWordFind++;
                 i++;
@@ -63,6 +70,27 @@ namespace ExercicioForWhile
           Percebemos, cada vez mais, que o julgamento imparcial das eventualidades talvez venha a ressaltar a relatividade das regras de conduta normativas. Por outro lado, a execução dos pontos do programa estimula a padronização das condições financeiras e administrativas exigidas. O empenho em analisar a crescente influência da mídia acarreta um processo de reformulação e modernização dos relacionamentos verticais entre as hierarquias.";
         }
 
+        /// <summary>
+        /// Método para buscar a palavra pela função for
+        /// </summary>
+        /// <param name="wordFind">Palavra para fazer as buscas.</param>
+        /// <returns></returns>
+        private static int FindByfor(string wordFind)
+        {
+            var contentToFind = TextContent();
+            var wordFindLenght = wordFind.Length;
+            var lenghtText = contentToFind.Length - wordFindLenght + 1;
+            var contWordFind = 0;
 
+            for (int i = 0; i < lenghtText; i++)
+            {
+                var compareWord = string.Empty;
+                for (int b = 0; b < wordFindLenght; b++)
+                    compareWord += contentToFind[i + b].ToString();
+                if (wordFind == compareWord)
+                    contWordFind++;
+            }
+            return contWordFind;
+        }
     }
 }

@@ -4,38 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExercicioForWhile
+namespace Split
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Informe a palavra de busca: ");
-            var wordCount = FindByWhile(Console.ReadLine());
-            Console.WriteLine($"Encontrados {wordCount} palavras.");
+            var textFind = TextContent();
+            var contString = -1;
+
+            string[] stringFind = new string[] {"que"};
+            string[] firstNames = textFind.Split(stringFind, StringSplitOptions.None);
+            foreach (string firstName in firstNames)
+                contString ++;
+            Console.WriteLine(contString);
             Console.ReadKey();
-        }
-        /// <summary>
-        /// Método para buscar a palavra pela função while
-        /// </summary>
-        /// <param name="wordFind">Aceita 3 caracteres</param>
-        /// <returns></returns>
-        private static int FindByWhile(string wordFind)
-        {
-            var contentToFind = TextContent();
-            var lenghtText = contentToFind.Length - 2;
-            var contWordFind = 0;
-            var i = 0; // para trocar o nome da variável em todos os lugares de uma vez ctrl+r+r
-            while (i < lenghtText)
-            {
-                var compareWord = contentToFind[i].ToString() +
-                                  contentToFind[i + 1].ToString() +
-                                  contentToFind[i + 2].ToString();
-                if (wordFind == compareWord)
-                    contWordFind++;
-                i++;
-            }
-            return contWordFind;
         }
 
         /// <summary>
@@ -62,7 +45,5 @@ namespace ExercicioForWhile
 
           Percebemos, cada vez mais, que o julgamento imparcial das eventualidades talvez venha a ressaltar a relatividade das regras de conduta normativas. Por outro lado, a execução dos pontos do programa estimula a padronização das condições financeiras e administrativas exigidas. O empenho em analisar a crescente influência da mídia acarreta um processo de reformulação e modernização dos relacionamentos verticais entre as hierarquias.";
         }
-
-
     }
 }
