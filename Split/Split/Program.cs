@@ -10,12 +10,24 @@ namespace Split
     {
         static void Main(string[] args)
         {
-            var textFind = TextContent();           
-            string[] stringFind = new string[] { "que" };
-            string[] firstNames = textFind.Split(stringFind, StringSplitOptions.RemoveEmptyEntries);
-            var allan = firstNames.Length;
-            Console.WriteLine(allan-1);
+            Console.WriteLine("Digite a palavra procurada no texto: ");
+            var returnFind = RetornaFind(Console.ReadLine());
+            Console.WriteLine(returnFind);
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Método de busca de palavra através de split
+        /// </summary>
+        /// <param name="wordFind">Parâmetro da busca da palavra</param>
+        /// <returns></returns>
+        private static int RetornaFind (string wordFind)
+        {
+            var textFind = TextContent();
+            string[] stringFind = new string[] {wordFind};
+            string[] firstNames = textFind.Split(stringFind, StringSplitOptions.RemoveEmptyEntries);
+            var numberFind = firstNames.Length-1;
+            return numberFind;
         }
 
         /// <summary>
