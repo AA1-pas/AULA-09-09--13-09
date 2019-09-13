@@ -19,8 +19,8 @@ namespace EXERCICIO7
             Console.WriteLine("Digite seu texto: ");
             text = Console.ReadLine();
             Console.WriteLine("\n");
-            Console.WriteLine($@"Esse texto possue {ContaVogais("a", text)} vogai(s) 'a', {ContaVogais("e", text)} vogai(s) 'e', 
-{ContaVogais("i", text)} vogai(s) 'i', {ContaVogais("o", text)} vogai(s) 'o' e {ContaVogais("u", text)} vogai(s) 'u'. "); 
+            Console.WriteLine($@"Esse texto possue {ContaVogais("a", "A", text)} vogai(s) 'a', {ContaVogais("e", "E" , text)} vogai(s) 'e', 
+{ContaVogais("i", "I", text)} vogai(s) 'i', {ContaVogais("o", "O", text)} vogai(s) 'o' e {ContaVogais("u","U", text)} vogai(s) 'u'. ");
             Console.WriteLine("\n\nAperte qualquer tecla para sair.");
             Console.ReadKey();
         }
@@ -31,13 +31,15 @@ namespace EXERCICIO7
         /// <param name="vogal">vogal para contar no texto</param>
         /// <param name="textFind">texto para procurar a vogal</param>
         /// <returns></returns>
-        private static int ContaVogais(string vogal, string textFind)
+        private static int ContaVogais(string vogal, string vogalMaiu, string textFind)
         {
-            string[] stringFind = new string[] {vogal};
+            string[] stringFind = new string[] { vogal };
             string[] firstNames = textFind.Split(stringFind, StringSplitOptions.None);
-            var numberFind = firstNames.Length - 1;
+            string[] stringFind2 = new string[] { vogalMaiu };
+            string[] firstNames2 = textFind.Split(stringFind2, StringSplitOptions.None);
+            var numberFind = firstNames.Length - 1+(firstNames2.Length - 1);
             return numberFind;
-          
+
         }
     }
 }
