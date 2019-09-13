@@ -19,8 +19,8 @@ namespace EXERCICIO7
             Console.WriteLine("Digite seu texto: ");
             text = Console.ReadLine();
             Console.WriteLine("\n");
-            Console.WriteLine($@"Esse texto possue {ContaVogais("a", text)} vogais 'a', {ContaVogais("e", text)} vogais 'e', 
-{ContaVogais("i", text)} vogais 'i', {ContaVogais("o", text)} vogais 'o' e {ContaVogais("u", text)} vogais 'u'. "); 
+            Console.WriteLine($@"Esse texto possue {ContaVogais("a", text)} vogai(s) 'a', {ContaVogais("e", text)} vogai(s) 'e', 
+{ContaVogais("i", text)} vogai(s) 'i', {ContaVogais("o", text)} vogai(s) 'o' e {ContaVogais("u", text)} vogai(s) 'u'. "); 
             Console.WriteLine("\n\nAperte qualquer tecla para sair.");
             Console.ReadKey();
         }
