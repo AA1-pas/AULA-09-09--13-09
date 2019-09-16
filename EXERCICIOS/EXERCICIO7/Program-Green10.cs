@@ -11,7 +11,7 @@ namespace EXERCICIO7
 
         static void Main(string[] args)
         {
-
+            
             string nomeCompleto = string.Empty;
             Console.WriteLine("*****************************");
             Console.WriteLine("***** Seja bem Vindo!!! *****");
@@ -19,8 +19,8 @@ namespace EXERCICIO7
             Console.WriteLine("Digite seu texto: ");
             string text = Console.ReadLine();
             Console.WriteLine("\n");
-            Console.WriteLine($@"Esse texto possue {ContaVogais("a", "A", text)} vogai(s) 'A', {ContaVogais("e", "E", text)} vogai(s) 'E', 
-{ContaVogais("i", "I", text)} vogai(s) 'I', {ContaVogais("o", "O", text)} vogai(s) 'O' e {ContaVogais("u", "U", text)} vogai(s) 'U'. ");
+            Console.WriteLine($@"Esse texto possue {ContaVogais("a", "A", text)} vogai(s) 'A', {ContaVogais("e", "E" , text)} vogai(s) 'E', 
+{ContaVogais("i", "I", text)} vogai(s) 'I', {ContaVogais("o", "O", text)} vogai(s) 'O' e {ContaVogais("u","U", text)} vogai(s) 'U'. ");
             Console.WriteLine("\n\nAperte qualquer tecla para sair.");
             Console.ReadKey();
         }
@@ -36,11 +36,10 @@ namespace EXERCICIO7
             string[] stringFind = new string[] { vogal };
             string[] quebraMin = textFind.Split(stringFind, StringSplitOptions.None);
             string[] stringFind2 = new string[] { vogalMaiu };
-            string[] quebraMaiu = textFind.Split(stringFind2, StringSplitOptions.None);
-            var numberFind = quebraMin.Length - 1 + (quebraMaiu.Length - 1);
+            string[] quebraMaiu= textFind.Split(stringFind2, StringSplitOptions.None);
+            var numberFind = quebraMin.Length - 1+(quebraMaiu.Length - 1);
             return numberFind;
 
         }
     }
 }
-
