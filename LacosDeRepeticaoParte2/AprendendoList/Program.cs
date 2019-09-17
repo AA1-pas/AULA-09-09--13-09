@@ -15,7 +15,7 @@ namespace AprendendoList
         static void Main(string[] args)
         {
             AddListaInformacoes();
-            ImprimiListFor();
+            ImprimiListForeach();
             Console.ReadKey();
         }
 

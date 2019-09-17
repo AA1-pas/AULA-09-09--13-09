@@ -11,17 +11,12 @@ namespace EXERCICIO7
 
         static void Main(string[] args)
         {
-            string[] stringFind = new string[] {"A", "E", "I", "O", "U" };
+           
             Console.WriteLine("*****************************");
             Console.WriteLine("***** Seja bem Vindo!!! *****");
             Console.WriteLine("*****************************\n\n");
             Console.WriteLine("\n");
-            var valores = ContaVogais();
-            for (int i = 0; i < 5; i++)
-            {
-                valores[i] += valores[i + 5];
-                Console.WriteLine($"A quantidade de letras {stringFind[i]} é de {valores[i]}.");
-            }
+            ContaVogais();
             Console.WriteLine("\n\nAperte qualquer tecla para sair.");
             Console.ReadKey();
         }
@@ -34,12 +29,13 @@ namespace EXERCICIO7
         {
             int[] numberFind = new int[10];
             Console.WriteLine("Digite seu texto: ");
-            string text = Console.ReadLine();
-            char[] stringFind2 = new char[] { 'a', 'e', 'i', 'o', 'u','A','E','I','O','U'};
+            string text = Console.ReadLine().ToUpper();
+            char[] stringFind2 = new char[] {'A','E','I','O','U'};
             for (int i = 0; i < stringFind2.Length; i++)
             {
                 string[] quebraLinha = text.Split(stringFind2[i]);
                 numberFind[i] = quebraLinha.Length - 1;
+                Console.WriteLine($"A quantidade de letras {stringFind2[i]} é de {numberFind[i]}.");
             }
             return numberFind;
 
