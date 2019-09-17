@@ -26,7 +26,7 @@ namespace PROJETOEXERCICIO1709
                     Console.Write("     ");
                 }
                 Console.Write("*");
-                Console.Write("\n");
+                Console.Write("\n"); 
 
             }
             Console.ReadKey();
