@@ -39,11 +39,11 @@ namespace PROJETOEXERCICIO1709
                     break;
                 case "3":
                     Console.Clear();
-                    DesenhandoArvore();
+                    ListaCerveja();
                     break;
                 case "4":
                     Console.Clear();
-                    DesenhandoArvore();
+                    ListaMarcaCarro();
                     break;
                 case "0":
                     break;
@@ -119,6 +119,56 @@ namespace PROJETOEXERCICIO1709
             double ladoQuadrado = double.Parse((Console.ReadLine()));
             Console.WriteLine("\n"+$"A área do quadrado é de {ladoQuadrado* ladoQuadrado} cm²."+"\n");
             RetornaMenu("");
+        }
+
+        /// <summary>
+        /// Metodo para gerar lista de cerveja
+        /// </summary>
+        private static void ListaCerveja()
+        {
+            List<string> listaCerveja = new List<string>();
+            Console.WriteLine("Digite a cerveja: ");
+            listaCerveja.Add(Console.ReadLine());
+            Console.WriteLine("*** CERVEJA ADICIONADA COM SUCESSO! ***");
+            AdicionaLista(listaCerveja);
+        }
+
+        /// <summary>
+        /// Metodo adiciona itens á lista
+        /// </summary>
+        /// <param name="lista">lista de itens para impressão</param>
+        private static void AdicionaLista(List<string> lista)
+        {
+            Console.WriteLine("Deseja adicionar mais um item á lista?   S - Sim  N - Não");
+            if (Console.ReadKey().KeyChar.ToString().ToUpper() == "S")
+                ListaCerveja();
+            ImprimiLista(lista);
+        }
+
+        /// <summary>
+        /// Metodo para imprimir uma lista
+        /// </summary>
+        /// <param name="lista">lista para impressão</param>
+        private static void ImprimiLista(List<string> lista)
+        {
+            Console.WriteLine("Lista de itens cadastrados:");
+            foreach (var item in lista)
+            {
+                Console.WriteLine(item);
+            }
+            RetornaMenu("");
+        }
+
+        /// <summary>
+        /// Metodo para gerar lista de marca de carros
+        /// </summary>
+        private static void ListaMarcaCarro()
+        {
+            List<string> listaMarcaCarro = new List<string>();
+            Console.WriteLine("Digite a marca de carro: ");
+            listaMarcaCarro.Add(Console.ReadLine());
+            Console.WriteLine("*** CERVEJA ADICIONADA COM SUCESSO! ***");
+            AdicionaLista(listaMarcaCarro);
         }
     }
 }
