@@ -2,36 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PROJETOEXERCICIO1709
 {
-    class Program
+    public class Program
     {
+        public static List<string> listaCerveja = new List<string>();
+        public static List<string> listaMarcaCarro = new List<string>();
         static void Main(string[] args)
         {
-            MenuPrincipal();
+            MenuPrincipalProjetos();
         }
 
         /// <summary>
         /// Metodo de menu principal de escolha dos metodos
         /// </summary>
-        public static void MenuPrincipal()
+        public static void MenuPrincipalProjetos()
         {
             Console.Clear();
-            Console.WriteLine(@"Qual método você deseja executar?
+            Console.Write(@"Qual método você deseja executar?
 1-Árvore  
 2-Área Quadrado 
 3-Lista Cerveja 
 4-Lista Marca Carro 
-
 0-Sair
-");
+
+OPÇÃO: ");
             switch(Console.ReadKey().KeyChar.ToString())
             {
                 case "1":
                     Console.Clear();
-                    DesenhandoArvore();
+                    DesenhaArvore();
                     break;
                 case "2":
                     Console.Clear();
@@ -55,7 +58,6 @@ namespace PROJETOEXERCICIO1709
             }
             
         }
-
  
         /// <summary>
         /// Metodo desenha cada linha da arvore
@@ -72,18 +74,44 @@ namespace PROJETOEXERCICIO1709
         /// <summary>
         /// metodo contem os dados e desenha a arvore
         /// </summary>
-        private static void DesenhandoArvore()
+        private static void DesenhaArvore()
         {
             List<int> formatoArvore = new List<int>
-            { 4,9,8,14,12,16,13,17,14,15,12,13,10,10,4,4,4,4,4,4,4,4,5,6,8,13,40};
+            { 5,9,8,14,12,16,13,17,14,15,12,13,10,10,4,4,4,4,4,4,4,4,5,6,8,13,40};
+            int k = 0;
+            var cont = 0;
 
-            foreach (var i in formatoArvore)       
+            for (int j = 20; j <= 25; j++)
             {
-                EspacoArvore(40-i);
-                DesenhandoALinhaArvore(2*i);
-                Console.Write("\n");
+                if (j < 25)
+                {
+                    foreach (var i in formatoArvore)
+                    {
+                        EspacoArvore(40 - i);
+                        if (cont >= 19 && cont <= 20)
+                            DesenhandoALinhaArvore(2 * (i - k));
+                        else
+                            DesenhandoALinhaArvore(2 * i);
+                        Console.Write("\n");
+                        cont++;
+                    }
+                    Thread.Sleep(250);
+                    k++;
+                    cont = 0;
+                    Console.Clear();
+                }
+                else
+                {
+                    foreach (var i in formatoArvore)
+                    {
+                        EspacoArvore(40 - i);
+                        if (cont >20)
+                            DesenhandoALinhaArvore(2 * i);
+                        Console.Write("\n");
+                        cont++;
+                    }
+                }
             }
-
             RetornaMenu("");
         }
 
@@ -93,9 +121,9 @@ namespace PROJETOEXERCICIO1709
         /// <param name="menssagemErro">menssagem de advertencia ao usuário</param>
         private static void RetornaMenu(string menssagemErro)
         {
-            Console.WriteLine(menssagemErro + "Tecle qualquer tecla para retornar ao menu principal.");
+            Console.WriteLine("\n" + menssagemErro + "Tecle qualquer tecla para retornar ao menu principal.");
             Console.ReadKey();
-            MenuPrincipal();
+            MenuPrincipalProjetos();
         }
         
         /// <summary>
@@ -106,7 +134,7 @@ namespace PROJETOEXERCICIO1709
         {
             for (int i = 0; i < espacador; i++)
             {
-                Console.Write(".");
+                Console.Write("#");
             }
         }
 
@@ -126,22 +154,27 @@ namespace PROJETOEXERCICIO1709
         /// </summary>
         private static void ListaCerveja()
         {
-            List<string> listaCerveja = new List<string>();
+            Console.Clear();
             Console.WriteLine("Digite a cerveja: ");
             listaCerveja.Add(Console.ReadLine());
-            Console.WriteLine("*** CERVEJA ADICIONADA COM SUCESSO! ***");
-            AdicionaLista(listaCerveja);
+            Console.WriteLine("\n*** CERVEJA ADICIONADA COM SUCESSO! ***\n");
+            AdicionaLista(listaCerveja, 1);
         }
 
         /// <summary>
         /// Metodo adiciona itens á lista
         /// </summary>
         /// <param name="lista">lista de itens para impressão</param>
-        private static void AdicionaLista(List<string> lista)
+        private static void AdicionaLista(List<string> lista, int tipo)
         {
-            Console.WriteLine("Deseja adicionar mais um item á lista?   S - Sim  N - Não");
+            Console.WriteLine("Deseja adicionar mais um item á lista?   S - Sim  ");
             if (Console.ReadKey().KeyChar.ToString().ToUpper() == "S")
-                ListaCerveja();
+            {
+                if(tipo == 1)
+                    ListaCerveja();
+                else
+                    ListaMarcaCarro();
+            };
             ImprimiLista(lista);
         }
 
@@ -151,7 +184,8 @@ namespace PROJETOEXERCICIO1709
         /// <param name="lista">lista para impressão</param>
         private static void ImprimiLista(List<string> lista)
         {
-            Console.WriteLine("Lista de itens cadastrados:");
+            Console.Clear();
+            Console.WriteLine("Lista de itens cadastrados:\n");
             foreach (var item in lista)
             {
                 Console.WriteLine(item);
@@ -164,11 +198,11 @@ namespace PROJETOEXERCICIO1709
         /// </summary>
         private static void ListaMarcaCarro()
         {
-            List<string> listaMarcaCarro = new List<string>();
+            Console.Clear();
             Console.WriteLine("Digite a marca de carro: ");
             listaMarcaCarro.Add(Console.ReadLine());
-            Console.WriteLine("*** CERVEJA ADICIONADA COM SUCESSO! ***");
-            AdicionaLista(listaMarcaCarro);
+            Console.WriteLine("\n*** MARCA ADICIONADA COM SUCESSO! ***\n");
+            AdicionaLista(listaMarcaCarro, 2);
         }
     }
 }
