@@ -103,6 +103,7 @@ namespace ForeachNaLista
         /// <returns></returns>
         private static string ValorBit (double valor)
         {
+           
             return Convert.ToString("   BTC " + (valor / 41767.07).ToString("N2") + "   ");
         }
 

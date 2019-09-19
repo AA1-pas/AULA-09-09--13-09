@@ -20,10 +20,11 @@ namespace MinhaSegundaClass
                     Tomate = 3
                 });
 
-                listaDeCestas.ForEach(i =>
-                Console.WriteLine($"Banana {i.Banana} tomate {i.Tomate} laranja {i.Laranja}"));
-                Console.ReadKey();
+               
             }
+            listaDeCestas.ForEach(i =>
+               Console.WriteLine($"Banana {i.Banana} tomate {i.Tomate} laranja {i.Laranja}"));
+            Console.ReadKey();
         }
     }
 }

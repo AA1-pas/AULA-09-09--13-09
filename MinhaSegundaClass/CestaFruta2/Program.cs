@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace MinhaSegundaClass
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            var minhaCestaDeFrutas = new List<MinhasFrutas>();
+            Console.WriteLine("Digite o nome da Fruta e a quantidade");
+            var minhaCestaDeFrutas = new List<MinhasFrutas>()
             {
-                minhaCestaDeFrutas.Add(new Fr()
+                new MinhasFrutas()
                 {
-                    Banana = 6,
-                    Laranja = 10,
-                    Tomate = 3
-                });
+                    Frutas = Console.ReadLine(),
+                    QtdFrutas = int.Parse(Console.ReadLine())
+                }
 
-                listaDeCestas.ForEach(i =>
-                Console.WriteLine($"Banana {i.Banana} tomate {i.Tomate} laranja {i.Laranja}"));
-                Console.ReadKey();
-            }
+            };
+
+            minhaCestaDeFrutas.ForEach(i =>
+            Console.WriteLine($"A cesta de frutas têm {i.QtdFrutas} de {i.Frutas}."));
+            Console.ReadKey();
         }
     }
 }
