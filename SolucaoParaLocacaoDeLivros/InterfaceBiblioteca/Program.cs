@@ -10,26 +10,27 @@ namespace InterfaceBiblioteca
 {
     class Program
     {
-        //instanciamos "Carregamos para memoria"nosso controlador de livros
-        static LivrosController livros = new LivrosController();
+        //instanciamos "Carregamos para memoria" nosso controlador de livros
+        static LivrosController livrosController = new LivrosController();
        
-        //instanciamos "Carregamos para memoria"nosso controlador de usuários
-        static UsuarioController listaUsuarios = new UsuarioController();
+        //instanciamos "Carregamos para memoria" nosso controlador de usuários
+        static UsuarioController usuarioController = new UsuarioController();
 
         static void Main(string[] args)
         {
+            CabecalhoPrograma();
             while (!RealizaLoginSistema())
             {
                 Console.WriteLine("*** LOGIN E SENHA INVÁLIDOS ***\n");
                 Console.ReadKey();
             }
-            MostraMenuSistema();
+            MostrarMenuSistema();
         }
 
         /// <summary>
         /// MOstra no console o menu disponível do sistema
         /// </summary>
-        private static void MostraMenuSistema()
+        private static void MostrarMenuSistema()
         {
 
             int opcao = int.MinValue;
@@ -41,6 +42,8 @@ namespace InterfaceBiblioteca
                 Console.WriteLine("1 - Listar Usuários");
                 Console.WriteLine("2 - Listar Livros");
                 Console.WriteLine("3 - Cadastrar Livros");
+                Console.WriteLine("4 - Cadastrar Usuários");
+                Console.WriteLine("5 - Remover Usuários");
                 Console.WriteLine("8 - Voltar ao login");
                 Console.WriteLine("9 - Sair");
                 Console.Write("\nOpção: ");
@@ -50,12 +53,32 @@ namespace InterfaceBiblioteca
                 switch (opcao)
                 {
                     case 1:
-                        MostraUsuarios();
+                        CabecalhoPrograma();
+                        MostrarUsuarios();
+                        RetornaMenuTecla();
                         break;
                     case 2:
-                        MostraLivros();
+                        CabecalhoPrograma();
+                        MostrarLivros();
+                        RetornaMenuTecla();
+                        break;
+                    case 3:
+                        CabecalhoPrograma();
+                        AdicionarLivro();
+                        RetornaMenuTecla();
+                        break;
+                    case 4:
+                        CabecalhoPrograma();
+                        AdicionarUsuario();
+                        RetornaMenuTecla();
+                        break;
+                    case 5:
+                        CabecalhoPrograma();
+                        RemoverUsuarioPeloId();
+                        RetornaMenuTecla();
                         break;
                     case 8:
+                        CabecalhoPrograma();
                         while (!RealizaLoginSistema())
                         {
                             Console.WriteLine("*** LOGIN E SENHA INVÁLIDOS ***\n");
@@ -80,8 +103,8 @@ namespace InterfaceBiblioteca
         /// estiverem corretos.</returns>
         private static bool RealizaLoginSistema()
         {
-            Console.Clear();
-            CabecalhoPrograma();
+
+        
             Console.WriteLine("=============== AUTENTICAÇÃO SISTEMA ================\n");
                                
             Console.WriteLine("Informe seu login e senha para acessar o sistema:\n");
@@ -91,8 +114,6 @@ namespace InterfaceBiblioteca
 
             Console.Write("Senha: ");
             var senhaDoUsuario = Console.ReadLine();
-
-            UsuarioController usuarioController = new UsuarioController();
 
             return usuarioController.LoginSistema(new Usuario()
             {
@@ -104,27 +125,21 @@ namespace InterfaceBiblioteca
         /// <summary>
         /// Metodo instancia o objeto Livro e mosta 1 registro
         /// </summary>
-        private static void MostraLivros()
+        private static void MostrarLivros()
         {
-            Console.Clear();
-            CabecalhoPrograma();
+ 
             Console.WriteLine("============ LISTA DE LIVROS CADASTRADOS ============\n");
-            livros.Livros.ForEach(i => Console.WriteLine($"Nome: {i.Nome} \nId: {i.Id}\n--------------------\n"));
-            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
-            Console.ReadKey();
+            livrosController.RetornaListadeLivros().ForEach(i => Console.WriteLine($"Nome: {i.Nome} \nId: {i.Id}\n--------------------\n"));
+           
         }
 
         /// <summary>
         /// Metodo instancia o objeto Usuarios e mosta registros
         /// </summary>
-        private static void MostraUsuarios()
+        private static void MostrarUsuarios()
         {
-            Console.Clear();
-            CabecalhoPrograma();
             Console.WriteLine("=========== LISTA DE USUARIOS CADASTRADOS ===========\n");
-            listaUsuarios.ListaUsuarios.ForEach(i => Console.WriteLine($"Nome: {i.Login} \nId: {i.Id}\n--------------------\n"));
-            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
-            Console.ReadKey();
+            usuarioController.RetornaListadeUsuario().ForEach(i => Console.WriteLine($"Nome: {i.Login} \nId: {i.Id}\n--------------------\n"));
         }
 
         /// <summary>
@@ -132,6 +147,7 @@ namespace InterfaceBiblioteca
         /// </summary>
         private static void CabecalhoPrograma()
         {
+            Console.Clear();
             Console.WriteLine(".....................................................\n");
             Console.WriteLine("********* SISTEMA DE LOCAÇÃO DE LIVROS V1.0 *********");
             Console.WriteLine(".....................................................\n");
@@ -155,5 +171,81 @@ namespace InterfaceBiblioteca
         //    listaImprimir.ForEach(i => Console.WriteLine($"Nome {i.Nome} \nId {i.Id}\n--------------------\n"));
         }*/
 
+        /// <summary>
+        /// Metodo para adicionar um novo livro
+        /// </summary>
+        public static void AdicionarLivro()
+        {
+            string nomeDoLivro = string.Empty;
+            Console.WriteLine("================ CADASTRO DE LIVROS  ================\n");
+            
+            while(nomeDoLivro == "")
+            {
+                Console.WriteLine("Digite um nome válido de um livro a ser cadastrado:");
+                nomeDoLivro = Console.ReadLine();
+                if (nomeDoLivro == "")
+                    Console.WriteLine("*** NOME DE LIVRO INVÁLIDO ***\n");
+
+            }
+           
+            livrosController.AdicionarLivro(new Livro()
+            {
+                Nome = nomeDoLivro,
+        });
+            Console.WriteLine("*** LIVRO CADASTRADO COM SUCESSO ***\n");
+        }
+
+        /// <summary>
+        /// Metodo para adicionar um novo usuário
+        /// </summary>
+        public static void AdicionarUsuario()
+        {
+            string loginDoUsuario = string.Empty;
+            string senhaDoUSuario = string.Empty;
+       
+            CabecalhoPrograma();
+            Console.WriteLine("=============== CADASTRO DE USUÁRIOS ===============\n");
+            while (loginDoUsuario == "")
+            {
+                Console.WriteLine("Digite um login válido para cadastrar:");
+                loginDoUsuario = Console.ReadLine();
+                if (loginDoUsuario == "")
+                    Console.WriteLine("*** USUÁRIO INVÁLIDO ***\n");
+            } 
+            while (senhaDoUSuario == "")
+            {
+                Console.WriteLine("Digite uma senha válida para cadastrar:");
+                senhaDoUSuario = Console.ReadLine();
+                if(senhaDoUSuario == "")
+                    Console.WriteLine("*** SENHA INVÁLIDA ***\n");
+            }
+            usuarioController.AdicionarUsuarios(new Usuario()
+            {
+                Login = loginDoUsuario,
+                Senha = senhaDoUSuario
+
+        });
+            Console.WriteLine("*** USUÁRIO CADASTRADO COM SUCESSO ***\n");
+
+        }
+
+        public static void RemoverUsuarioPeloId ()
+        {
+            Console.WriteLine("============ REMOVE CADASTRO USUÁRIO ============\n");
+            MostrarUsuarios();
+            Console.WriteLine("Informe o ID do usuário que deseja desativar:");
+            var usuarioId = int.Parse(Console.ReadLine());
+            usuarioController.RemoverUsuarioPorId(usuarioId);   
+            Console.WriteLine("*** USUÁRIO REMOVIDO COM SUCESSO ***\n");
+        }
+
+        /// <summary>
+        /// Metodo para finalizar operação e aguardar usuario pressionar uma tecla para finalizar
+        /// </summary>
+        public static void RetornaMenuTecla()
+        {
+            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
+            Console.ReadKey();
+        }
     }
 }
